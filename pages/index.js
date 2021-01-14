@@ -14,7 +14,8 @@ export async function getStaticProps() {
   return {
     props:{
       articles: data.items
-    }
+    },
+    revalidate: 1,
   }
 }
 

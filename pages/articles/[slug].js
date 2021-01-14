@@ -18,7 +18,7 @@ export async function getStaticPaths() {
         params: { slug: article.fields.slug}
     }))
 
-    return { paths, fallback: false }
+    return { paths, fallback: true }
 }
 
 export async function getStaticProps({ params }) {
@@ -31,13 +31,14 @@ export async function getStaticProps({ params }) {
     return { 
         props: {
             article : data.items[0]
-        }
+        },
+        revalidate: 1
     }
 }
 
 
 export default function Article({ article }) {
-    console.log(article)
+    if (!article) return <div>404</div>
 
     const date = article.fields.date.substring(0,10)
 
